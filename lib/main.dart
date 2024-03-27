@@ -138,60 +138,57 @@ class SSHCommandWidget extends StatelessWidget {
                   executeSSHCommand(command.host, command.user,
                           command.password, command.command)
                       .then((value) {
-                        Navigator.pop(context);
-                        showDialog(context: context, builder: (context) {
+                    Navigator.pop(context);
+                    showDialog(
+                        context: context,
+                        builder: (context) {
                           return Dialog(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.black
-                              ),
-                              padding: const EdgeInsets.all(20),
-                              width: 500,
-                              child: SingleChildScrollView(
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      const Text(
-                                        "RESULT",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Colors.black),
+                                  padding: const EdgeInsets.all(20),
+                                  width: 500,
+                                  child: SingleChildScrollView(
+                                    child: Center(
+                                      child: Column(children: [
+                                        const Text(
+                                          "RESULT",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 15),
-                                      Text(value, style: const TextStyle(color: Colors.white),),
-                                    ]
-                                  ),
-                                ),
-                              )
-                            )
-                          );
+                                        const SizedBox(height: 15),
+                                        Text(
+                                          value,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ]),
+                                    ),
+                                  )));
                         });
-                      });
+                  });
                   showDialog(
-                    context: context,
-                    builder: (context) {
-                      return Dialog(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15)
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15)),
+                            padding: const EdgeInsets.all(20),
+                            height: 300,
+                            width: 500,
+                            child: const Column(
+                              children: [
+                                CircularProgressIndicator(),
+                              ],
+                            ),
                           ),
-                          padding: const EdgeInsets.all(20),
-                          height: 300,
-                          width: 500,
-                          child: const Column(
-                            children: [
-                              CircularProgressIndicator(
-                                
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                  );
+                        );
+                      });
                 },
                 child: const Text("Execute"),
               ),
@@ -199,12 +196,36 @@ class SSHCommandWidget extends StatelessWidget {
             Flexible(
               flex: 1,
               child: IconButton(
-                icon: const Icon(
-                  Icons.remove_circle_outline,
-                  color: Colors.red,
-                ),
-                onPressed: () => parent._removeCommand(command),
-              ),
+                  icon: const Icon(
+                    Icons.remove_circle_outline,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("Remove command"),
+                            content: const Text("Are you sure you want to remove this command?"),
+                            actions: [
+                              TextButton(
+                                child: const Text("Yes"),
+                                onPressed: () {
+                                  parent._removeCommand(command);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          );
+                        });
+                    //  parent._removeCommand(command),
+                  }),
             )
           ],
         ),

@@ -87,6 +87,8 @@ class AddSSHCommand extends StatelessWidget {
                         return null;
                       },
                       controller: user,
+                      autocorrect: false,
+                      enableSuggestions: false,
                     ),
                   ),
                 ),
@@ -118,6 +120,8 @@ class AddSSHCommand extends StatelessWidget {
                     return null;
                   },
                   controller: command,
+                  autocorrect: false,
+                  enableSuggestions: false,
                 ),
               ),
             ),
