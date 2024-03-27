@@ -242,5 +242,9 @@ Future<String> executeSSHCommand(
     onPasswordRequest: () => password,
   );
 
-  return utf8.decode(await connection.run(command));
+  command = command.replaceAll("sudo", "echo '$password' | sudo -S ");
+
+  final ret = utf8.decode(await connection.run(command));
+
+  return ret.isEmpty || ret == "[sudo] password for $user: " ? "Command executed successfully" : ret;
 }
