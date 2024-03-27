@@ -137,6 +137,21 @@ class AddSSHCommand extends StatelessWidget {
                         shape:
                             MaterialStatePropertyAll(BeveledRectangleBorder()),
                       ),
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("Cancel"),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 2,
+                  fit: FlexFit.tight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                        shape:
+                            MaterialStatePropertyAll(BeveledRectangleBorder()),
+                      ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           SSHCommand.save(SSHCommand(
@@ -158,21 +173,6 @@ class AddSSHCommand extends StatelessWidget {
                         }
                       },
                       child: const Text("Add command"),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 2,
-                  fit: FlexFit.tight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                        shape:
-                            MaterialStatePropertyAll(BeveledRectangleBorder()),
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text("Cancel"),
                     ),
                   ),
                 ),
